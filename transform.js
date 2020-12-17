@@ -146,18 +146,17 @@ function initPlayerGeoCoor() {
 
 
 function playerMoves(position) {
-  playerGeoCoor4 = playerGeoCoor3;
-  playerGeoCoor3 = playerGeoCoor2;
-  playerGeoCoor2 = playerGeoCoor1;
-  playerGeoCoor1 = {
-    lat: position.latitude,
-    lng: position.longitude
-  };
-  let newPaddlePos = {
-    lat: (playerGeoCoor1.lat + playerGeoCoor2.lat + playerGeoCoor3.lat + playerGeoCoor4.lat) / 4,
-    lng: (playerGeoCoor1.lng + playerGeoCoor2.lng + playerGeoCoor3.lng + playerGeoCoor4.lng) / 4
-  };
-  setPaddleGeoCoor(newPaddlePos.lat, newPaddlePos.lng);
+  if(typeof position !== 'undefined') {
+    playerGeoCoor4 = playerGeoCoor3;
+    playerGeoCoor3 = playerGeoCoor2;
+    playerGeoCoor2 = playerGeoCoor1;
+    playerGeoCoor1 = position;
+    let newPaddlePos = {
+      lat: (playerGeoCoor1.lat + playerGeoCoor2.lat + playerGeoCoor3.lat + playerGeoCoor4.lat) / 4,
+      lng: (playerGeoCoor1.lng + playerGeoCoor2.lng + playerGeoCoor3.lng + playerGeoCoor4.lng) / 4
+    };
+    setPaddleGeoCoor(newPaddlePos.lat, newPaddlePos.lng);
+  }
 }
 
 /*

@@ -4,6 +4,8 @@ let canvas;
 
 let timeBetweenGPS = 0;
 
+let curPos;
+
 //Wird ein mal zu Beginn von p5.js aufgerufen.
 //Wird ein mal zu Beginn von p5.js aufgerufen.
 function preload() {
@@ -17,13 +19,25 @@ function setup() {
   setSlider();
   setButtons();
   getCurrentPosition(setupMap);
+  getCurrentPosition(curPos);
   pandaBg();
+  drawPosition();
 }
 
 //Wird in einer Schleife von p5.js aufgerufen.
 function draw() {
-  if(timeBetweenGPS >= 100 && yLineIsSet) {
-    getCurrentPosition(playerMoves);
+  clear();
+  /*
+  if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(setCurPos, geoError, {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 6000
+    });
+  }
+  */
+  if(timeBetweenGPS >= 50) {
+    getCurrentPosition(setCurPos);
     timeBetweenGPS = 0;
   } else {
     timeBetweenGPS += deltaTime;
@@ -31,7 +45,9 @@ function draw() {
 
   if(yLineIsSet) {
     drawLinePaddle();
+    playerMoves(curPos);
   }
+  drawPosition();
   //mousePosition();
 }
 
@@ -45,14 +61,37 @@ function mousePosition() {
   }
 }
 
+
 //Wird ausgeführt, wenn die Karte sich ändert (Verschieben, Zoomen, Drehen).
 //Innerhalb dieser Methode werden all die Methoden aufgerufen, die die neuen
 //Bildschirm-Koordinaten bestimmen und die Methoden, die die Objekte zeichen.
 function drawLinePaddle() {
-  clear();
   updateStartingPoint();
   setYLineMinMax();
   drawYLine();
   drawPaddleOnPosition();
   setRotAngle(slider.value());
+}
+
+function setCurPos(position) {
+  console.log(position.latitude);
+  curPos = {
+    lat: position.latitude,
+    lng: position.longitude
+  };
+}
+
+function drawPosition() {
+  if(typeof curPos !== 'undefined' && typeof mappaMap !== 'undefined') {
+    let pos = mappaMap.latLngToPixel(curPos.lat, curPos.lng);
+    console.log(pos);
+    fill(color('magenta'));
+    ellipse(pos.x, pos.y, 15, 15);
+    console.log("Draw Position");
+  }
+  //else {console.log("Position undefined")};
+}
+
+function geoError(error) {
+  console.log("Geolocation Error: ", error);
 }
