@@ -1,0 +1,140 @@
+@charset "utf-8";
+/* Reset */
+
+.imgmap{
+	min-height: 100%;
+    background-image: url("pcMap.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+	background-position: center center;
+	background-color: #ced4daff;
+}
+html, body { 
+	margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 10px;
+    font-style: normal;
+    font-family: sans-serif;
+    overflow-y: hidden;
+	overflow-x: hidden;
+}
+div, nav, p  {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+	background: transparent;
+	}
+
+button, input {
+  margin: 10px; 
+  text-align: center; 
+}
+
+label {
+  margin: 10px;
+  font-size: 35px;
+}
+
+img 	{ margin:0; padding:0; border:0; }
+
+table, tr, th, td, tbody, tfoot, thead {
+	margin: 0; padding: 0; border: 0;
+	vertical-align: baseline;
+	background: transparent;
+	}
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+form {
+	text-align: center;
+	margin-top: 30%;
+}
+
+h1{
+	font-family: Impact; font-size: 22px; text-emphasis: none;
+}
+
+
+/* CSS Document */
+
+a,b {
+	color: #ced4daff;
+	text-decoration: none;
+  }
+
+/*MAIN*/
+
+/*
+#startscreen {
+	 height: 100vh; width:100vw; background-color: #ced4daff; padding-top: 5%;  background-color: transparent; 
+}
+*/
+
+.startpic{
+	padding: 0% 15%; position: absolute; top: 10%; align-items: center;
+}
+
+.ueberschrift1 {
+	color:#284f92; font-size:70px; text-align:center; padding-top: 43%; visibility: hidden;
+}
+.ueberschrift2 {
+	color:#284f92; font-size:30px; text-align:center; text-decoration:underline;
+}
+.text1 {
+	color:#000; font-size:20px; text-align:center;
+}
+.text2 {
+	color:#000; font-size:20px; text-align:center;
+}
+.buttons1 {
+	color:#FFF; font-size:15px; text-align:center;
+}
+.buttons2 {
+	color:#FFF; font-size:15px; text-align:center;
+}
+.menuebuttons1{
+	font-size:23px; text-align: center; background-color: #212529ff; 
+	border: none;  border-radius: 30px; padding: 10px 25px; margin: 10% 15%; align-self: center;
+}
+.menuebuttons2{
+	font-size:23px; text-align: center;  color: #ced4daff; background-color: #212529ff; 
+	border: none; margin: 0%; padding: 0%;
+}
+.menuebuttons3{
+	font-family: Impact; font-size: 20px; color:#212529ff; 
+	float: right; margin-right: 5%; margin-top: 15px; 
+}
+
+#startscreenbtns {
+ 	text-align: center; margin-top: 100%;
+}
+ 
+#menuscreenbtns{
+	text-align: center; margin-top: 35%;
+}
+
+.impressum{
+	margin: 20% 0 15% 0; font-size: 23px; text-align: center; color: #212529ff; 
+ }
+
+.font2{
+	font-family: Impact; font-size: 25px;
+}
+ 
+#playerName{
+	width: 150px; padding: 5px;
+	font-size: 20px; color: #212529ff;
+	border: 5px solid#212529ff;
+	border-radius: 30px;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+.heading1{
+	font-size: 35px;
+	text-align: center;
+	margin-top: 30%;
+}
+.back{
+	color:  #212529ff;
+}

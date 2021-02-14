@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" class="imgmap">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <title>Create or Join Game</title>
+  </head>
+
+<body>
+
+  <a class="menuebuttons3" href="index.html">Back</a>
+
+    <div id="startscreen" >
+
+      <form name="form1">
+
+        <div class="font2">
+          <label for="playerName">Enter your name</label> <br>
+          <input type="text" name ="playerName" id="playerName" placeholder="Name" class="font2"/>
+        </div>
+        <br>
+        <div id="menuscreenbtns">
+          <p class="menuebuttons1"> <button type="button" id="createButton" class="menuebuttons2" onclick="createGame()">CREATE GAME</button> </p>
+          <p class="menuebuttons1"> <button type="button" id="joinButton"   class="menuebuttons2" onclick="joinGame()">JOIN GAME</button> </p> <br>
+        </div>
+
+      </form>
+
+    </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-analytics.js"></script>
+  <script src="empty.js"></script>
+  <script src="../data/data.js"> </script>
+  <script>
+
+    initializeDatabase();
+
+    function createGame() {
+      let pName = document.getElementById("playerName").value;
+      playerID = playersTable.push().key;
+      roomID = roomsTable.push().key;
+      playerName = pName;
+      addThisPlayer();
+      addThisRoom();
+      storePlayerID();
+      storeRoomID();
+      storePlayerNumber(1);
+      window.location.href = "../game/startGame.html";
+    }
+
+    function joinGame() {
+      playerName = document.getElementById("playerName").value;
+      storePlayerName();
+      window.location.href = "lobby.html";
+    }
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" class="imgmap">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <title>Join Game</title>
+    <style media="screen">
+      html {
+        overflow-y: scroll;
+      }
+      .room {
+        border: 7.5px solid #212529ff;
+        margin: 25px 30px;
+        padding: 10px 20px;
+        border-radius: 30px;
+        background-color: rgb(255, 255, 255, 0.5);
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <a class="menuebuttons3" href="index.html">Back</a>
+
+    <div class="font2">
+      <p class="heading1">JOIN GAME</p>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-analytics.js"></script>
+    <script src="../data/data.js" ></script>
+
+    <script>
+    let roomIDArray = [];
+    let roomPlayerOneArray = [];
+    let roomPlayerOneNameArray = [];
+    let n = 1;
+
+    initializeDatabase()
+    fetchOpenRooms();
+    retrievePlayerID();
+
+    function fetchOpenRooms() {
+      roomsTable.once('value')
+        .then(function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            if(childSnapshot.val().playerTwo == "-1") {
+            roomIDArray.push(childSnapshot.key);
+            let playerOneID = childSnapshot.val().playerOne;
+            roomPlayerOneArray.push(playerOneID);
+
+            playersTable.child(playerOneID).once('value')
+              .then(function(snapshot) {
+                let pOneName = snapshot.val().name;
+                roomPlayerOneNameArray.push(pOneName);
+                showRoom(pOneName);
+              });
+            }
+          });
+        });
+    }
+
+    function showRoom(pName) {
+      let roomElement = document.createElement("div");
+      document.body.appendChild(roomElement);
+
+      let classAttr = document.createAttribute("class");
+      classAttr.value = "room";
+      roomElement.setAttributeNode(classAttr);
+      let mouseOverAttr = document.createAttribute("onmouseover");
+      mouseOverAttr.value = "mouseOverRoom(this)";
+      roomElement.setAttributeNode(mouseOverAttr);
+      let mouseOutAttr = document.createAttribute("onmouseout");
+      mouseOutAttr.value = "mouseOutRoom(this)";
+      roomElement.setAttributeNode(mouseOutAttr);
+      let clickOnAttr = document.createAttribute("onclick");
+      clickOnAttr.value = "roomClicked(this)";
+      roomElement.setAttributeNode(clickOnAttr);
+
+      let gameHeader = document.createElement("h1");
+      roomElement.appendChild(gameHeader);
+      let gameText = document.createTextNode("Game ".concat(n.toString()));
+      gameHeader.appendChild(gameText);
+
+      let createdByHeader = document.createElement("h2");
+      roomElement.appendChild(createdByHeader);
+      let createdByText = document.createTextNode("created by ".concat(pName));
+      createdByHeader.appendChild(createdByText);
+
+      ++n;
+    }
+
+    function mouseOverRoom(el) {
+        el.style.backgroundColor = "black";
+        el.style.color ="white";
+        el.style.border = "3px solid white";
+      }
+
+    function mouseOutRoom(el) {
+      el.style.backgroundColor = "white";
+      el.style.color = "black";
+      el.style.border = "3px solid black";
+    }
+
+    function roomClicked(el) {
+      let content = el.innerHTML;
+      let number = content.match(/\d+/g)[1];
+      let rID = roomIDArray[number-1];
+      if(confirm("Are you sure you want to join this game?")) {
+        retrievePlayerName();
+        roomID = rID;
+        playerID = playersTable.push().key;
+        addThisPlayer();
+
+        updateThisRoomAttribute("playerTwo", playerID);
+
+        storePlayerNumber(2);
+        storePlayerID();
+        storeRoomID();
+        window.location.href = "../game/startGame.html";
+      }
+    }
+
+    </script>
+  </body>
+</html>
