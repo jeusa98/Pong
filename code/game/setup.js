@@ -70,7 +70,6 @@ function startGame() {
   slider.hide();
   playHereButton.hide();
   startGameButton.hide();
-  updateThisPlayerAttribute("ready", true);
 }
 
 function pandaBg(){

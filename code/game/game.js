@@ -224,10 +224,14 @@ function checkGameWon() {
     showWonScreen();
     startNewGameButton.show();
     gameEnded = true;
+    xVelocity = 0;
+    yVelocity = 0;
   } else if(otherPlayerPoints >= 2) {
     showLostScreen();
     startNewGameButton.show();
     gameEnded = true;
+    xVelocity = 0;
+    yVelocity = 0;
   }
 }
 

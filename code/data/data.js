@@ -205,7 +205,7 @@ function determineOtherPlayerID() {
 
 function removeInactivePlayers() {
   let timeNow = Date.now();
-  let cutoff = timeNow - 20000; //Zeitpunkt vor 20s
+  let cutoff = timeNow - 30000; //Zeitpunkt vor 20s
   let old = playersTable.orderByChild('timestamp').endAt(cutoff).limitToLast(1);
   let listener = old.on('child_added', function (snapshot) {  //alle Elemente länder als 20s inaktiv
     console.log("Delete: ", snapshot.key, "; cutoff = ", timeNow, "; timestamp = ", snapshot.val().timestamp);

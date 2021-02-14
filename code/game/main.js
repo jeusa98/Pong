@@ -62,8 +62,10 @@ function draw() {
       makeHelperMap();
     }
     if(mapImageLoaded && staticMapLoadingTime > 500) {
-
-      if(otherPlayerReady) {
+      if(!ready) {
+      updateThisPlayerAttribute("ready", true);
+      }
+      if(otherPlayerReady && !gameEnded) {
       //if(true) {
         background(255);
         image(mapImage, 0, 0);
